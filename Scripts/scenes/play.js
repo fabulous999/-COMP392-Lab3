@@ -15,11 +15,13 @@ var scenes;
         Play.prototype.start = function () {
             this.bank_bg = new createjs.Bitmap(assets.getResult("bank_BG"));
             //  this.rober = new createjs.Bitmap(assets.getResult("rober"));
-            this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ", config.Screen.CENTER_X - 180, config.Screen.CENTER_Y - 50);
+            this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ", config.Screen.CENTER_X - 350, config.Screen.CENTER_Y - 250);
+            // this.tinmerlabel = new objects.Label(this._timer.toString(), "80px Consolar", "#ffffff ",config.Screen.CENTER_X - 350, config.Screen.CENTER_Y + 250);
             stage.enableMouseOver();
             stage.cursor = "enemy";
             this.addChild(this.bank_bg);
             this.addChild(this._scorelabel);
+            this.addChild(this.tinmerlabel);
             this._enemy = new objects.Enemy("enemy", 5);
             this._enemy.on("click", this._onEnemyClick, this);
             this.addChild(this._enemy);
@@ -28,8 +30,16 @@ var scenes;
         Play.prototype.update = function () {
             this._timer += createjs.Ticker.interval;
             console.log(this._timer);
-            if (this._timer >= 1000) {
-                this._timer = 0;
+            /*
+              this.removeChild(this.tinmerlabel);
+             this.tinmerlabel = new objects.Label(this._timer.toString(), "80px Consolar", "#ffffff ",config.Screen.CENTER_X - 350, config.Screen.CENTER_Y +250);
+               this.addChild(this.tinmerlabel);
+            
+            */
+            if (this._timer >= 10000) {
+                /*this._timer =0;*/
+                scene = config.Scene.MENU;
+                changeScene();
                 console.log(this._timer);
             }
             console.log(this._timer);
@@ -41,7 +51,7 @@ var scenes;
                 currentScene.removeChild(this._enemy);
                 var x = (Math.random() * 6 * 100) + 1;
                 var y = (Math.random() * 6 * 100) + 1;
-                var life = (Math.random() * 2) + 1;
+                var life = (Math.random() * 5) + 1;
                 score = score + 1;
                 this._enemy = new objects.Enemy("enemy", life);
                 this._enemy.on("click", this._onEnemyClick, this);
@@ -49,7 +59,7 @@ var scenes;
                 this._enemy.x = x;
                 this._enemy.y = y;
                 this.removeChild(this._scorelabel);
-                this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ", config.Screen.CENTER_X - 180, config.Screen.CENTER_Y - 50);
+                this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ", config.Screen.CENTER_X - 350, config.Screen.CENTER_Y - 250);
                 this.addChild(this._scorelabel);
             }
         };
