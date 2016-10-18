@@ -15,9 +15,11 @@ var scenes;
         Play.prototype.start = function () {
             this.bank_bg = new createjs.Bitmap(assets.getResult("bank_BG"));
             //  this.rober = new createjs.Bitmap(assets.getResult("rober"));
+            this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ", config.Screen.CENTER_X - 180, config.Screen.CENTER_Y - 50);
             stage.enableMouseOver();
             stage.cursor = "enemy";
             this.addChild(this.bank_bg);
+            this.addChild(this._scorelabel);
             this._enemy = new objects.Enemy("enemy", 5);
             this._enemy.on("click", this._onEnemyClick, this);
             this.addChild(this._enemy);
@@ -40,11 +42,15 @@ var scenes;
                 var x = (Math.random() * 6 * 100) + 1;
                 var y = (Math.random() * 6 * 100) + 1;
                 var life = (Math.random() * 2) + 1;
+                score = score + 1;
                 this._enemy = new objects.Enemy("enemy", life);
                 this._enemy.on("click", this._onEnemyClick, this);
                 this.addChild(this._enemy);
                 this._enemy.x = x;
                 this._enemy.y = y;
+                this.removeChild(this._scorelabel);
+                this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ", config.Screen.CENTER_X - 180, config.Screen.CENTER_Y - 50);
+                this.addChild(this._scorelabel);
             }
         };
         return Play;

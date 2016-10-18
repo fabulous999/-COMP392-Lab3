@@ -6,6 +6,8 @@ module scenes {
       private _enemy : objects.Enemy;
 
    private _scorelabel : objects.Label;
+
+
              private _timer : number = 0;
            
 
@@ -18,13 +20,15 @@ module scenes {
 
    this.bank_bg = new createjs.Bitmap(assets.getResult("bank_BG"));
  //  this.rober = new createjs.Bitmap(assets.getResult("rober"));
-
+  this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ",config.Screen.CENTER_X - 180, config.Screen.CENTER_Y - 50);
+        
 
          stage.enableMouseOver();
           stage.cursor = "enemy";
 
            
          this.addChild(this.bank_bg);
+  this.addChild(this._scorelabel);
 
 
         this._enemy = new objects.Enemy("enemy",5);
@@ -60,11 +64,11 @@ console.log(this._timer);
 this._enemy.shot();
       if(this._enemy.dead) {
                currentScene.removeChild(this._enemy);
-       
+     
 var x = (Math.random()* 6*100) + 1 ;
 var y = (Math.random()* 6*100) + 1 ;
 var life = (Math.random()* 2) + 1 ;
-
+  score = score + 1;
         this._enemy = new objects.Enemy("enemy",life);
   this._enemy.on("click",this._onEnemyClick, this)
       
@@ -72,7 +76,12 @@ var life = (Math.random()* 2) + 1 ;
 
  this._enemy.x = x;
 this._enemy.y = y;
-      }
+  this.removeChild(this._scorelabel);
+ 
+ this._scorelabel = new objects.Label(score.toString(), "80px Consolar", "#ffffff ",config.Screen.CENTER_X - 180, config.Screen.CENTER_Y - 50);
+   this.addChild(this._scorelabel);
+
+   }
 
         
     }}

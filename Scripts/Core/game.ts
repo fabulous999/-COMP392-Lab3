@@ -12,7 +12,7 @@ var scene: number;
 
 
 
-var score: number;
+var score: number = 0;
 // Preload Assets required
 var assetData:objects.Asset[] = [
     {id: "PlayBtn", src: "../../Assets/images/sack.png"},

@@ -7,7 +7,7 @@ var enemyAtlas;
 var spriteSheetLoader;
 var currentScene;
 var scene;
-var score;
+var score = 0;
 // Preload Assets required
 var assetData = [
     { id: "PlayBtn", src: "../../Assets/images/sack.png" },
